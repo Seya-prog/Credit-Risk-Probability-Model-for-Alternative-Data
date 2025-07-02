@@ -1,0 +1,14 @@
+artifact_uri: file:C:/Users/DELL/Credit-Risk-Probability-Model-for-Alternative-Data/mlruns/0/0114545cca90463d8e958aee1bc18e74/artifacts
+end_time: 1751464366915
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 0114545cca90463d8e958aee1bc18e74
+run_name: random_forest
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1751464362088
+status: 3
+tags: []
+user_id: DELL
