@@ -1,0 +1,40 @@
+artifact_path: file:C:/Users/DELL/Credit-Risk-Probability-Model-for-Alternative-Data/mlruns/0/models/m-85efa84615d142689157ab1d44676039/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.13.2
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.0
+is_signature_from_type_hint: false
+mlflow_version: 3.1.1
+model_id: m-85efa84615d142689157ab1d44676039
+model_size_bytes: 426975
+model_uuid: m-85efa84615d142689157ab1d44676039
+prompts: null
+run_id: 0114545cca90463d8e958aee1bc18e74
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  serving_input_path: serving_input_example.json
+  type: dataframe
+signature:
+  inputs: '[{"type": "double", "name": "TransactionHour", "required": true}, {"type":
+    "double", "name": "TransactionDay", "required": true}, {"type": "double", "name":
+    "TransactionMonth", "required": true}, {"type": "double", "name": "TransactionYear",
+    "required": true}, {"type": "double", "name": "TransactionDayOfWeek", "required":
+    true}, {"type": "double", "name": "TotalTransactionAmount", "required": true},
+    {"type": "double", "name": "AverageTransactionAmount", "required": true}, {"type":
+    "double", "name": "TransactionAmountStd", "required": true}, {"type": "double",
+    "name": "TransactionCount", "required": true}]'
+  outputs: '[{"type": "double", "name": "prediction", "required": true}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2025-07-02 13:52:42.584485'

@@ -1,0 +1,14 @@
+artifact_uri: file:C:/Users/DELL/Credit-Risk-Probability-Model-for-Alternative-Data/mlruns/0/0891fd132ad5420780a16bf5399784c0/artifacts
+end_time: 1751464379069
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 0891fd132ad5420780a16bf5399784c0
+run_name: gradient_boosting
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1751464373801
+status: 3
+tags: []
+user_id: DELL
