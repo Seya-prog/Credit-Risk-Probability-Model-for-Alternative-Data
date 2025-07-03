@@ -3,42 +3,71 @@
 import pytest
 import pandas as pd
 import numpy as np
-from src.model_training import load_and_split_data
+from src.data_processing import load_and_split_data
 from src.proxy_target_engineering import calculate_rfm_metrics, identify_high_risk_cluster
 
-def test_load_and_split_data(tmp_path):
-    """Test data loading and splitting functionality."""
-    # Create a sample dataset
-    df = pd.DataFrame({
+def test_load_and_split_data():
+    """Test the data loading and splitting functionality"""
+    # Create a mock dataset
+    mock_data = pd.DataFrame({
         'CustomerId': range(100),
-        'TransactionYear': [2019] * 100,
-        'TransactionMonth': [1] * 100,
-        'TransactionDay': [1] * 100,
-        'TransactionHour': [12] * 100,
-        'TotalTransactionAmount': np.random.random(100),
+        'feature1': np.random.randn(100),
+        'feature2': np.random.randn(100),
         'is_high_risk': np.random.choice([0, 1], size=100)
     })
     
-    # Save to temporary file
-    data_path = tmp_path / "test_data.csv"
-    df.to_csv(data_path, index=False)
+    # Save mock data
+    mock_data.to_csv('./data/processed/test_dataset.csv', index=False)
     
-    # Test splitting
+    # Test the function
     X_train, X_test, y_train, y_test = load_and_split_data(
-        data_path=str(data_path),
+        data_path='./data/processed/test_dataset.csv',
         test_size=0.2,
         random_state=42
     )
     
-    # Check shapes
-    assert len(X_train) == 80
-    assert len(X_test) == 20
+    # Verify shapes
+    assert len(X_train) == 80  # 80% of 100
+    assert len(X_test) == 20   # 20% of 100
     assert len(y_train) == 80
     assert len(y_test) == 20
     
-    # Check that CustomerId is not in features
-    assert 'CustomerId' not in X_train.columns
-    assert 'is_high_risk' not in X_train.columns
+    # Verify types
+    assert isinstance(X_train, np.ndarray)
+    assert isinstance(X_test, np.ndarray)
+    assert isinstance(y_train, np.ndarray)
+    assert isinstance(y_test, np.ndarray)
+    
+    # Verify no data leakage
+    assert 'CustomerId' not in X_train
+    assert 'is_high_risk' not in X_train
+
+def test_data_preprocessing():
+    """Test data preprocessing steps"""
+    # Create mock data with missing values and mixed types
+    mock_data = pd.DataFrame({
+        'CustomerId': range(100),
+        'numeric_feature': np.random.randn(100),
+        'integer_feature': np.random.randint(0, 100, 100),
+        'is_high_risk': np.random.choice([0, 1], size=100)
+    })
+    
+    # Add some missing values
+    mock_data.loc[0:10, 'numeric_feature'] = np.nan
+    mock_data.to_csv('./data/processed/test_dataset.csv', index=False)
+    
+    # Test loading and preprocessing
+    X_train, X_test, y_train, y_test = load_and_split_data(
+        data_path='./data/processed/test_dataset.csv'
+    )
+    
+    # Verify no missing values
+    assert not np.isnan(X_train).any()
+    assert not np.isnan(X_test).any()
+    
+    # Verify all features are float64
+    assert X_train.dtype == np.float64
+    assert X_test.dtype == np.float64
 
 def test_calculate_rfm_metrics():
     """Test RFM metrics calculation."""

@@ -1,6 +1,4 @@
-artifact_location: file:C:/Users/DELL/Credit-Risk-Probability-Model-for-Alternative-Data/mlruns/0
-creation_time: 1751464348502
+artifact_location: ./mlruns/0
 experiment_id: '0'
-last_update_time: 1751464348502
 lifecycle_stage: active
 name: Default

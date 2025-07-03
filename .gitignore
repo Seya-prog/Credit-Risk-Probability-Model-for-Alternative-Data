@@ -21,6 +21,7 @@ ENV/
 /data/processed/
 
 # Model artifacts
+mlruns/
 *.pkl
 *.joblib
 *.h5
