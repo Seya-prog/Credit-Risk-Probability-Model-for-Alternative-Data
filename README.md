@@ -91,6 +91,67 @@ For this project, we'll implement a balanced approach that optimizes for both in
    - Unix/MacOS: `source venv/bin/activate`
 4. Install dependencies: `pip install -r requirements.txt`
 
+## Running Tests
+
+To run all tests with coverage reports:
+
+```bash
+pytest tests/ -v --cov=src
+```
+
+## Running the API
+
+### Using Docker
+
+Build and run the API using Docker Compose:
+
+```bash
+docker-compose up --build
+```
+
+The API will be available at http://localhost:8000. Visit http://localhost:8000/docs for the interactive API documentation.
+
+### Without Docker
+
+Run the FastAPI application directly:
+
+```bash
+uvicorn src.api.main:app --reload
+```
+
+## API Usage
+
+The API provides a `/predict` endpoint that accepts transaction features and returns credit risk probabilities.
+
+Example request:
+
+```bash
+curl -X POST "http://localhost:8000/predict" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "TransactionYear": 2023,
+    "TransactionMonth": 7,
+    "TransactionDay": 2,
+    "TransactionHour": 14,
+    "TransactionDayOfWeek": 0,
+    "TotalTransactionAmount": 1000.0,
+    "AverageTransactionAmount": 250.0,
+    "TransactionAmountStd": 100.0,
+    "TransactionCount": 4
+  }'
+```
+
+Example response:
+
+```json
+{
+  "risk_probability": 0.73,
+  "is_high_risk": true,
+  "model_version": "gradient_boosting_v1",
+  "prediction_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}
+```
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details. 

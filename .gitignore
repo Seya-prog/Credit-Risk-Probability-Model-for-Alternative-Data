@@ -19,12 +19,17 @@ ENV/
 # Data
 /data/raw/
 /data/processed/
+*.csv
+*.parquet
+*.xlsx
+*.xls
 
 # Model artifacts
+mlruns/
+/models/
 *.pkl
 *.joblib
 *.h5
-*.model
 
 # Logs
 logs/
@@ -32,16 +37,27 @@ logs/
 
 # Environment variables
 .env
+.env.*
 
 # IDE settings
 .vscode/
 .idea/
+*.sublime-*
+*.swp
+*.swo
 
 # Testing
 .coverage
 htmlcov/
 .pytest_cache/
 coverage.xml
+.tox/
+.nox/
 
 # Local development settings
-.DS_Store 
+.DS_Store
+Thumbs.db
+
+# Docker
+.docker/
+docker-volumes/ 
