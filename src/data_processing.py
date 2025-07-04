@@ -106,7 +106,8 @@ class AggregateFeatureGenerator(BaseEstimator, TransformerMixin):
         
         # Fill NaN values in standard deviation with 0 (for customers with single transaction)
         if 'TransactionAmountStd' in agg_features.columns:
-            agg_features['TransactionAmountStd'].fillna(0, inplace=True)
+            # Fix: Avoid chained assignment with inplace=True
+            agg_features = agg_features.fillna({'TransactionAmountStd': 0})
         
         return agg_features.reset_index()
 

@@ -60,6 +60,13 @@ def load_and_split_data(
     X[int_columns] = X[int_columns].astype('float64')
     logger.info(f"Converted {len(int_columns)} integer columns to float64")
     
+    # Handle missing values by imputing with mean
+    for column in X.columns:
+        if X[column].isna().any():
+            mean_value = X[column].mean()
+            X[column] = X[column].fillna(mean_value)
+            logger.info(f"Imputed missing values in column {column} with mean: {mean_value}")
+    
     # Split data
     X_train, X_test, y_train, y_test = map(np.array, train_test_split(
         X, y, test_size=test_size, random_state=random_state, stratify=y
