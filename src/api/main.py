@@ -60,7 +60,7 @@ async def predict(request: PredictionRequest):
         data = pd.DataFrame([request.dict()])
         
         # Make prediction
-        risk_prob = model.predict_proba(data)[0][1]
+        risk_prob = model.predict_proba(data.values)[0][1]
         is_high_risk = risk_prob >= 0.5
         
         # Create response

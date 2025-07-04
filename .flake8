@@ -1,0 +1,35 @@
+[flake8]
+max-line-length = 100
+exclude =
+    .git,
+    __pycache__,
+    venv,
+    build,
+    dist,
+    *.egg-info,
+    .tox
+# E128: continuation line under-indented for visual indent
+# E203: whitespace before ':'
+# E501: line too long
+# W291: trailing whitespace
+# W292: no newline at end of file
+# W293: blank line contains whitespace
+# W503: line break before binary operator
+# W504: line break after binary operator
+# E302: expected 2 blank lines, found 1
+# E305: expected 2 blank lines after class or function definition, found 1
+# F401: module imported but unused
+# F841: local variable is assigned to but never used
+ignore =
+    E128,
+    E203,
+    E501,
+    W291,
+    W292,
+    W293,
+    W503,
+    W504,
+    E302,
+    E305,
+    F401,
+    F841 

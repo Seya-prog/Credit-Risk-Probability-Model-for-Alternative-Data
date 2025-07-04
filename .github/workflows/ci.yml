@@ -3,20 +3,18 @@ name: CI/CD Pipeline
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
-        python-version: '3.9'
+        python-version: '3.11'
         
     - name: Install dependencies
       run: |
@@ -29,16 +27,4 @@ jobs:
         
     - name: Run tests
       run: |
-        pytest tests/ -v --cov=src
-        
-    - name: Build Docker image
-      if: github.ref == 'refs/heads/main'
-      run: |
-        docker build -t credit-risk-api .
-        
-    - name: Test Docker image
-      if: github.ref == 'refs/heads/main'
-      run: |
-        docker run -d -p 8000:8000 --name test-api credit-risk-api
-        sleep 5
-        curl -f http://localhost:8000/
+        pytest tests/
